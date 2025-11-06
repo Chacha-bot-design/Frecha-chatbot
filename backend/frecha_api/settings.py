@@ -12,6 +12,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1', 
+    'frecha-chatbot.onrender.com',
     '.onrender.com',
     '.railway.app'  
 ]
