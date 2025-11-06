@@ -9,7 +9,12 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-in-production'
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1', 
+    '.onrender.com',
+    '.railway.app'  
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,29 +60,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'frecha_api.wsgi.application'
 
-# FIXED Database Configuration
+# Database Configuration
 DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
 
+# Fix PostgreSQL URL format
 if DATABASE_URL.startswith('postgres://'):
     DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
 
-if DEBUG or DATABASE_URL.startswith('sqlite'):
-    # Use SQLite for development
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    # Use PostgreSQL for production
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True
-        )
-    }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=600,
+        ssl_require=not DEBUG
+    )
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
