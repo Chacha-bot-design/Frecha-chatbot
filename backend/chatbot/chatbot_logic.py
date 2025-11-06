@@ -17,14 +17,14 @@ class FrechaServicesChatbot:
                 "help": "I can help with:\n• Bundle router plans\n• SME services\n• Provider comparisons\n• Contact information",
                 "contact_info": "📞 Phone: +255 757 315 593\n✉️ Email: frechaiotech@gmail.com\n📍 Location: Dodoma",
                 "language_switched": "🌍 Switched to English!",
-                "providers": "Our providers: 🟥 Vodacom, 🟦 Yas, 🟨 Airtel, 🟩 Halotel"
+                "providers": "Our providers: 🟥 Vodacom, 🟦 Yas, 🟥Airtel, 🟨 Halotel"
             },
             "swahili": {
                 "greeting": f"Karibu {self.company_name}! Mshirika wako wa kuaminika kwa bundle router na huduma za SME.",
                 "help": "Naweza kukusaidia kuhusu:\n• Mipango ya bundle router\n• Huduma za SME\n• Kulinganisha watoa huduma\n• Mawasiliano",
                 "contact_info": "📞 Simu: +255 757 315 593\n✉️ Barua pepe: frechaiotech@gmail.com\n📍 Mahali: Dodoma",
                 "language_switched": "🌍 Nimebadilisha lugha kwa Kiswahili!",
-                "providers": "Watoa huduma wetu: 🟥 Vodacom, 🟦 Yas, 🟨 Airtel, 🟩 Halotel"
+                "providers": "Watoa huduma wetu: 🟥 Vodacom, 🟦 Yas, 🟥 Airtel, 🟨Halotel"
             }
         }
 

@@ -157,14 +157,14 @@ def home():
                 <div class="providers">
                     <div class="provider-tag">🟥 Vodacom</div>
                     <div class="provider-tag">🟦 Yas</div>
-                    <div class="provider-tag">🟨 Airtel</div>
-                    <div class="provider-tag">🟩 Halotel</div>
+                    <div class="provider-tag">🟥 Airtel</div>
+                    <div class="provider-tag">🟨Halotel</div>
                 </div>
             </div>
             
             <div class="chat-area">
                 <div class="quick-actions">
-                    <button class="quick-btn" onclick="sendQuickMessage('mambo')">👋 Mambo</button>
+                    <button class="quick-btn" onclick="sendQuickMessage('Habari')">🤖 Habari</button>
                     <button class="quick-btn" onclick="sendQuickMessage('bundle')">📦 Bundle</button>
                     <button class="quick-btn" onclick="sendQuickMessage('vodacom')">🟥 Vodacom</button>
                     <button class="quick-btn" onclick="sendQuickMessage('SME')">🏢 SME</button>
