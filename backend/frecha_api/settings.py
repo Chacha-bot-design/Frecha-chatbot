@@ -32,7 +32,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # This must be here
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,11 +59,11 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'frecha_api.wsgi.application'
+WSGI_APPLICATION = 'frecha_api.wsgi:application'
+
 # Database Configuration
 DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
 
-# Ensure proper PostgreSQL URL format
 if DATABASE_URL.startswith('postgres://'):
     DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
 
@@ -71,16 +71,10 @@ DATABASES = {
     'default': dj_database_url.config(
         default=DATABASE_URL,
         conn_max_age=600,
-        ssl_require=True,  # Railway requires SSL
-        engine='django.db.backends.postgresql'
+        ssl_require=not DEBUG
     )
 }
 
-# Add database connection options
-DATABASES['default']['OPTIONS'] = {
-    'sslmode': 'require',
-    'connect_timeout': 30,
-}
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -102,8 +96,15 @@ TIME_ZONE = 'Africa/Dar_es_Salaam'
 USE_I18N = True
 USE_TZ = True
 
+# ✅ FIXED: Static files configuration
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Whitenoise configuration for better static file serving
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Ensure staticfiles directory exists
+os.makedirs(STATIC_ROOT, exist_ok=True)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -121,6 +122,3 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-
-
-   
