@@ -119,3 +119,7 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+if not DEBUG:
+    # Use PORT for Railway
+    ALLOWED_HOSTS = [f'.railway.app', 'localhost', '127.0.0.1']
