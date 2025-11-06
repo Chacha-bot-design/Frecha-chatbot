@@ -60,11 +60,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'frecha_api.wsgi.application'
-
 # Database Configuration
 DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
 
-# Fix PostgreSQL URL format
+# Ensure proper PostgreSQL URL format
 if DATABASE_URL.startswith('postgres://'):
     DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
 
@@ -72,10 +71,16 @@ DATABASES = {
     'default': dj_database_url.config(
         default=DATABASE_URL,
         conn_max_age=600,
-        ssl_require=not DEBUG
+        ssl_require=True,  # Railway requires SSL
+        engine='django.db.backends.postgresql'
     )
 }
 
+# Add database connection options
+DATABASES['default']['OPTIONS'] = {
+    'sslmode': 'require',
+    'connect_timeout': 30,
+}
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
